@@ -1,0 +1,83 @@
+.card-wallet-container{
+  margin: 1em 0;
+  overflow:hidden;
+}
+
+.card-wallet {
+  border: 1px solid #767d94;
+  background-color: #090f21;
+  /*background-image: url('/assets/img/eth-card.png');*/
+  border-radius: 5px;
+  height: 17.8125rem;
+  background-size: 44%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  box-shadow: 4px 4px 12px black;
+  cursor:pointer;
+}
+
+.card-wallet:hover {
+  background-color: #1b2138;
+  border: 1px solid white;
+}
+
+.card-title {
+  position: relative;
+  top: 1em;
+  left: 1em;
+  font-size: 1.3em;
+}
+.card-label {
+  position: absolute;
+  right: 1.5em;
+  top: 1.2em;
+  padding: 0.5em;
+  background: #ffffff38;
+  border-radius: 5px 0 0 5px;
+  font-size: 0.8em;
+}
+.card-header{
+  height: 25px;
+}
+
+.card-footer {
+  width: 100%;
+  background: #ffffff38;
+  position: relative;
+  top: 81px;
+  border-radius: 0 0 5px 5px;
+  height: 5em;
+}
+.card-balance-eth {
+  position: absolute;
+  left: 0.5em;
+  top: 0.6em;
+}
+.card-balance-fiat {
+  position: absolute;
+  top: 2.7em;
+  left: 0.5em;
+}
+.card-icon-refresh {
+  position: absolute;
+  right: 0.5em;
+  top: 1em;
+  font-size: 1.5em;
+  cursor: pointer;
+  color:#767d94;
+  z-index:10;
+}
+
+.img-card-container{
+  position: absolute;
+  height: 100%;
+  background-image: url(/assets/img/eth-card.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 41%;
+  width: 91%;
+  cursor: pointer;
+}
+
+/****************************************/
+

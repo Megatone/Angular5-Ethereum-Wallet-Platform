@@ -1,0 +1,22 @@
+<div mat-dialog-content>
+  <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
+    <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
+    {{message}}
+  </div>
+  <div class="form-group" [@fadeOut] *ngIf="status!='success'">
+    <input matInput [(ngModel)]="data.wallet.name" #name="ngModel" placeholder="Wallet Name" class="form-control-dark" tabindex="1"
+      required  pattern=".{4,50}"/>
+    <div class="form-control-error pull-right" *ngIf="!name.valid && name.touched">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+    <div class="form-control-success pull-right" *ngIf="name.valid && name.touched">
+      <span class="glyphicon glyphicon-ok"></span>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions [@fadeOut]  *ngIf="status!='success'">
+  <div class="form-group pull-right" style="width:100%">
+    <input type="button" class="btn btn-dark pull-right" (click)="create()" value="Create" style="margin-left:1em;" />
+    <input type="button" class="btn btn-dark pull-right" (click)="close()" value="Close" [disabled]="status =='success'" />
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="navigation col-lg-12">
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <a [routerLink]="['/home']" class="navbar-brand">
+          Ethereum Wallet Platform
+        </a>
+        <ul class="nav navbar-nav">
+          <li>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-home"></span>
+              Home
+            </a>
+          </li>
+          <li *ngIf="identity">
+              <a [routerLink]="['/account/wallets']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-credit-card"></span>
+                Wallets
+              </a>
+            </li>
+            <li *ngIf="identity">
+              <a [routerLink]="['/account/transactions']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-list"></span>
+                Transactions
+              </a>
+            </li>
+            <li *ngIf="identity">
+              <a [routerLink]="['/account/profile']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-user"></span>
+                Profile
+              </a>
+            </li>
+          <li>
+            <a [routerLink]="['/graphics']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-stats"></span>
+              Graphics
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-eye-open"></span>
+              About Us
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/contact']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-envelope"></span>
+              Contact
+            </a>
+          </li>
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+          <li>
+            <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+              Register
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+              Login
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+          <li class="avatar">
+            <img src="" *ngIf="identity.image && identity.image != 'null'" />
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              {{identity.name}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a [routerLink]="['/account/settings']" class="pointer">
+                  <span class="glyphicon glyphicon-cog"></span>
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" (click)="logout()" class="pointer">
+                  <span class="glyphicon glyphicon-log-out"></span>
+                  Salir
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="col-lg-12 col-centered main-router-outlet">
+  <router-outlet></router-outlet>
+</div>

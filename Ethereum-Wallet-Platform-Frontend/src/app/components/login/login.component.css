@@ -1,0 +1,13 @@
+.box-dark {
+  background: #090f21;
+  border: 1px solid #767d94;
+  border-radius: 5px;
+  margin-top: 0em;
+  box-shadow: 4px 4px 12px black;
+  padding: 2em;
+}
+
+.box-container-4{
+  min-width: 300px;
+  max-width: 400px;
+}

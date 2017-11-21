@@ -1,0 +1,122 @@
+<div class="container-fluid" *ngIf="transaction" [@fadeInOut]>
+
+  <div class="row">
+    <div class="col-lg-6 col-centered message-container">
+      <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
+        <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
+        {{message}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered action-wallet-container-full" (click)="back()">
+      <div class="center center-refresh">
+        <span class="glyphicon glyphicon-share-alt back"></span>
+        <span class="action-wallet">
+          Back
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered" ngxClipboard [cbContent]="transaction.hash" (click)="copyToClipboard()">
+      <h1 class="wallet-address">
+        <a>{{transaction.hash}}</a>
+      </h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered transaction-box">
+
+      <div class="col-sm-3">Tx Direction:</div>
+      <div class="col-sm-9 cbs">
+        <span class="label txt-label" [ngClass]="{'label-success' : transaction.to.toUpperCase() == transaction.wallet.address.toUpperCase() ,'label-danger' :  transaction.to.toUpperCase() != transaction.wallet.address.toUpperCase() }">
+          {{transaction.to.toUpperCase() == transaction.wallet.address.toUpperCase() ? '&nbsp;&nbsp;IN&nbsp;&nbsp;' : 'OUT'}}
+        </span>
+      </div>
+      <div class="col-sm-3">TxReceipt Status:</div>
+      <div class="col-sm-9 cbs">
+        <span>
+          <font color="#5cb85c" *ngIf="!transaction.isError">Success</font>
+          <font color="#d9534f" *ngIf="transaction.isError">Error</font>
+        </span>
+      </div>
+      <div class="col-sm-3">Block Height:</div>
+      <div class="col-sm-9 cbs">
+        {{transaction.blockNumber}} (
+        <span title="No of Blocks Mined Since">{{ transaction.confirmations }} block confirmations</span>)</div>
+      <div class="col-sm-3">TimeStamp:</div>
+      <div class="col-sm-9 cbs">
+        <span>{{calculateTimeText()}} ({{transaction.timeStamp * 1000 | date : 'dd-MM-yyyy hh:mm:ss'}})</span>
+      </div>
+      <div class="col-sm-3">From:</div>
+      <div class="col-sm-9 cbs">
+        {{transaction.from}}
+      </div>
+      <div class="col-sm-3">To:</div>
+      <div class="col-sm-9 cbs">
+        {{transaction.to}}
+      </div>
+      <div class="col-sm-3">Value:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The amount of ETH to be transferred to the recipient with the transaction">
+          {{transaction.value / CONST_UNIT | number }} Ether (${{((transaction.value / CONST_UNIT) * ethInfo.price_usd )| number:'.2'
+          }})
+        </span>
+      </div>
+      <div class="col-sm-3">Gas Limit:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The amount of GAS supplied for this transaction to happen">
+          {{transaction.gas}}
+        </span>
+      </div>
+      <div class="col-sm-3">Gas Used By Txn:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The amount of gas used by this specific transaction alone">
+          {{transaction.gasUsed}}
+        </span>
+      </div>
+      <div class="col-sm-3">Gas Price:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The price offered to the miner to purchase this amount of GAS, per GAS.">
+          {{transaction.gasPrice / CONST_UNIT | number : '1.10' }} Ether
+        </span>
+      </div>
+      <div class="col-sm-3">Actual Tx Cost/Fee:</div>
+      <div class="col-sm-9 cbs">
+        <span title="Gas Price * Gas Used By Transaction">
+          {{ (transaction.gasUsed * transaction.gasPrice) / CONST_UNIT | number : '.10'}} Ether ($ {{((transaction.gasUsed * transaction.gasPrice)
+          / CONST_UNIT) * ethInfo.price_usd | number : '.2'}})
+        </span>
+      </div>
+      <div class="col-sm-3">Cumulative Gas Used:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The total amount of gas used when this transaction was executed in the block. If being used with a smart contact, this would show the total amount of gas that has been used to interact with it">
+          {{transaction.cumulativeGasUsed}}
+        </span>
+      </div>
+      <div class="col-sm-3">Nonce:</div>
+      <div class="col-sm-9 cbs">
+        <span title="The transaction nonce">
+          {{transaction.nonce}}
+        </span>
+      </div>
+      <div class="col-sm-3">Input Data:</div>
+      <div class="col-sm-12 cbs">
+        <span title="The binary data that formed the input to the transaction, either the input data if it was a message call or the contract initialisation if it was a contract creation">
+          <textarea rows="4" class="form-control-dark" [disabled]="true" style="height:100px;">
+              {{transaction.input}}
+            </textarea>
+        </span>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+</div>

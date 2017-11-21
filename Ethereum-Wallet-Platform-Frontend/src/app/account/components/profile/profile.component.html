@@ -1,0 +1,130 @@
+<div class="col-lg-6 col-centered" style="padding: 0;">
+  <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
+    <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
+    {{message}}
+  </div>
+</div>
+
+<div class="col-lg-6 box-dark col-centered">
+
+  <form #editForm="ngForm" (ngSubmit)="editProfile()" [@fadeInOut] *ngIf="true">
+
+    <div class="form-group">
+      <input type="text" name="name" #name="ngModel" [(ngModel)]="identity.name" placeholder="Name" class="form-control-dark" required/>
+      <div class="form-control-error pull-right" *ngIf="!name.valid">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="name.valid">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="surname" #surname="ngModel" [(ngModel)]="identity.surname" placeholder="Surname" class="form-control-dark"
+        required/>
+      <div class="form-control-error pull-right" *ngIf="!surname.valid">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="surname.valid">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="email" name="email" #email="ngModel" [(ngModel)]="identity.email" placeholder="Email" class="form-control-dark"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+      <div class="form-control-error pull-right" *ngIf="!email.valid">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="email.valid">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="number" name="phone" #phone="ngModel" [(ngModel)]="identity.phone" placeholder="Phone" class="form-control-dark"
+        required/>
+      <div class="form-control-error pull-right" *ngIf="!phone.valid">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="phone.valid">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select name="country" #country="ngModel" [(ngModel)]="identity.country.code" class="form-control-dark" required>
+        <option *ngFor="let country of countries" [ngValue]="country.code">{{ country.name }}</option>
+      </select>
+      <div class="form-control-error pull-right" *ngIf="!country.valid">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="country.valid">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="address" #address="ngModel" [(ngModel)]="identity.address" placeholder="Address" class="form-control-dark"
+        required/>
+      <div class="form-control-error pull-right" *ngIf="!address.valid ">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+      <div class="form-control-success pull-right" *ngIf="address.valid ">
+        <span class="glyphicon glyphicon-ok"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-dark pull-right" [disabled]="!editForm.form.valid" value="Save" />
+      <span>&nbsp;</span>
+    </div>
+
+
+  </form>
+</div>
+
+<div class="col-lg-6 col-centered" style="padding: 0;">
+  <div class="alert alert-{{statusTowFactor}} " *ngIf="messageTwoFactor" [@fadeInOut]>
+    <span class="glyphicon glyphicon-{{ statusTowFactor =='success' ? 'ok' : 'remove'}}"></span>
+    {{messageTwoFactor}}
+  </div>
+</div>
+
+<div class="col-lg-6 box-dark col-centered">
+
+  <div class="row row-toggle">
+    <label class="label-toggle">Two Factor Authenticate Status </label>
+    <label class="switch pull-right">
+      <input type="checkbox" [(ngModel)]="identity.totp.active" [disabled]="true">
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <hr>
+  <div class="row row-toggle" *ngIf="!identity.totp.active && !qr_code" [@fadeInOut]>
+    <p>To enable two factor authentication , enter the password and push configure button</p>
+    <input type="password" name="password" #password="ngModel" [(ngModel)]="identity.password" placeholder="Password" class="form-control-dark form-control-dark-unsize"
+      pattern=".{4,50}" required/>
+    <button class="btn btn-dark " (click)="configure2A()">Configure</button>
+  </div>
+
+  <div class="row-fluid row-toggle" *ngIf="!identity.totp.active && qr_code" [@fadeInOut]>
+    <p>Now you need scan Qr code with your Latch Application and enter then pin code to verify two factor and enable this</p>
+    <div class="row row-toggle">
+      <h1>
+        <img src="{{qr_code}}" class="img-qr">
+      </h1>
+    </div>
+    <input type="text" name="code" #password="ngModel" [(ngModel)]="code" placeholder="Pin Code" class="form-control-dark form-control-dark-unsize"
+      pattern=".{3,50}" required>
+    <button class="btn btn-dark " (click)="enable2A()">Verify Code</button>
+  </div>
+
+  <div class="row row-toggle" *ngIf="identity.totp.active" [@fadeInOut]>
+    <p>To disable two factor authentication , enter the password and push configure button</p>
+    <input type="password" name="password" #password="ngModel" [(ngModel)]="identity.password" placeholder="Password" class="form-control-dark form-control-dark-unsize"
+      pattern=".{4,50}" required/>
+    <button class="btn btn-dark " (click)="disable2A()">Disable</button>
+  </div>
+
+</div>

@@ -1,0 +1,208 @@
+.sidebar-wallets > ul > li,
+.sidebar-wallets > ul > li> a,
+.sidebar-wallets > ul {
+    border-radius: 0;
+}
+.sidebar-wallets > ul > li> a {
+    cursor: pointer;
+    background: transparent;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    transition: all 300ms;
+    color: #767d94;
+}
+.sidebar-wallets > ul > li:hover> a {
+    background: transparent;
+    border-left: 3px solid #767d94;
+    border-right: 3px solid #767d94;
+    color: white;
+}
+.sidebar-header span,
+.sidebar-wallets > ul > li> a > span,
+.ul-eth-info > li > span {
+    margin-right: 10px;
+}
+.sidebar-header {
+    padding: 1em;
+    background: #090f21;
+    border-top: 1px solid #767d94;
+    border-bottom: 1px solid #767d94;
+}
+.ul-eth-info {
+    padding: 1em;
+}
+.ul-eth-info > li {
+    color: #767d94;
+    padding: 0.5em 0;
+}
+.icon-refresh {
+    display: block;
+    cursor: pointer;
+    height: 21px;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    width: 2em;
+    font-size: 2em;
+    color: #767d94;
+}
+.wallet-address {
+    text-align: center;
+    width: 100%;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: 1em 0;
+}
+.wallet-address > a {
+    margin: 0;
+    color: #767d94;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+.wallet-qr-code {
+    float: right;
+    padding: 2em 1em;
+}
+.icon-edit-wallet-name,
+.icon-refresh-wallet-balance {
+    font-size: 0.8em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+.wallet-name,
+.wallet-balance {
+    font-size: 2em;
+    margin: 1em 0.5em;
+}
+.wallet-name-container {
+    margin-top: 1em;
+    color: #767d94;
+    position: relative;
+}
+.wallet-balance-container {
+    margin-top: 1em;
+    color: #e25c4b;
+    position: relative;
+}
+.action-wallet-container {
+    width: 49% !important;
+    padding: 1em;
+    cursor: pointer;
+}
+.action-wallet-container-full:hover,
+.action-wallet-container:hover {
+    background-color: #1b2138;
+    border: 1px solid white;
+}
+.action-wallet-container-full {
+    padding: 1em;
+    cursor: pointer;
+}
+.center {
+    width: fit-content;
+    margin: 0 auto;
+}
+.center-send , .center-trash {
+    color: #e25c4b;
+    font-size: 1.5em;
+}
+.center-receive {
+    color: #2f5c94;
+    font-size: 1.5em;
+}
+.action-wallet {
+    color: white;
+}
+.center-refresh {
+    color: #767d94;
+    font-size: 1.5em;
+}
+.message-container {
+    padding: 0 !important
+}
+.message-container > .alert {
+    margin: 0 !important;
+}
+.txt-label {
+    width: 50px;
+}
+.td-hour {
+    min-width: 100px;
+}
+.a-hash-min {
+    display: none;
+}
+.a-hash-mid {
+    display: none;
+}
+.a-hash-max {
+    display: block;
+}
+.td-hash a {
+    margin: 0;
+    color: #767d94;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+.td-date {
+    margin: 0;
+    color: #767d94;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 150px!important;
+}
+
+.back{
+  transform: rotate(180deg);
+  transform: scale(-1, 1);
+}
+/* Smartphones (landscape) */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+  .navigation.col-lg-12{
+    padding:0
+  }
+
+
+    .wallet-qr-code {
+        float: right;
+        padding: 2em 1em;
+        width: 100%;
+        text-align: center;
+    }
+    .wallet-address {
+        font-size: 0.9em;
+    }
+    .wallet-balance-container {
+        margin-bottom: 1em;
+    }
+    .a-hash-min {
+        display: block;
+    }
+    .a-hash-mid {
+        display: none;
+    }
+    .a-hash-max {
+        display: none;
+    }
+
+}
+/* Smartphones (portrait) */
+
+@media only screen and (max-width: 320px) {}
+/* iPads (landscape) */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {}
+/* iPads (portrait) */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {}
+/* Ordenadores de sobremesa y portátiles */
+
+@media only screen and (min-width: 1224px) {}
+/* Pantallas grandes */
+
+@media only screen and (min-width: 1824px) {}

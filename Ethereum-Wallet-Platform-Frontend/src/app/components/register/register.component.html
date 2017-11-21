@@ -1,0 +1,90 @@
+<div class="col-lg-5 col-lg-offset-4">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12 form-dark form-login">
+    <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
+      <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
+      {{message}}
+    </div>
+    <div [@fadeOutform] *ngIf="status != 'success'">
+      <div class="form-group">
+        <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" placeholder="Name" class="form-control-dark" required/>
+        <div class="form-control-error pull-right" *ngIf="!name.valid && name.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="name.valid && name.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" placeholder="Surname" class="form-control-dark"
+          required/>
+        <div class="form-control-error pull-right" *ngIf="!surname.valid && surname.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="surname.valid && surname.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Email" class="form-control-dark"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+        <div class="form-control-error pull-right" *ngIf="!email.valid && email.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="email.valid && email.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" class="form-control-dark"
+          required/>
+        <div class="form-control-error pull-right" *ngIf="!password.valid && password.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="password.valid && password.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="number" name="phone" #phone="ngModel" [(ngModel)]="user.phone" placeholder="Phone" class="form-control-dark"
+          required/>
+        <div class="form-control-error pull-right" *ngIf="!phone.valid && phone.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="phone.valid && phone.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <select name="country" #country="ngModel" [(ngModel)]="user.country" class="form-control-dark" required>
+          <option value="-1" selected="selected" disabled>Select Country</option>
+          <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+        </select>
+        <div class="form-control-error pull-right" *ngIf="!country.valid && country.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="country.valid && country.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="address" #address="ngModel" [(ngModel)]="user.address" placeholder="Address" class="form-control-dark"
+          required/>
+        <div class="form-control-error pull-right" *ngIf="!address.valid && address.touched">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="form-control-success pull-right" *ngIf="address.valid && address.touched">
+          <span class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-dark pull-right" [disabled]="!registerForm.form.valid" />
+        <span>&nbsp;</span>
+      </div>
+    </div>
+    <div class="row" [@fadeOutform] *ngIf="status == 'success'">
+      <span class="span-center"> Now you can loguin
+        <a [routerLink]="['/login']">here</a>
+      </span>
+    </div>
+  </form>
+</div>

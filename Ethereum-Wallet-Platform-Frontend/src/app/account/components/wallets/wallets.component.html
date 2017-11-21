@@ -1,0 +1,87 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-lg-8 col-centered">
+
+      <nav class="navbar navbar-dark navbar-dark-sub">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <ul class="nav navbar-nav">
+              <li role="presentation">
+                <a (click)="openDialogNewWallet()">
+                  <span class=" glyphicon glyphicon-plus"></span>
+                  New Wallet
+                </a>
+              </li>
+              <li role="presentation">
+                <a>
+                  <span class="glyphicon glyphicon-log-in"></span>
+                  Restore Wallet
+                </a>
+              </li>
+              <li role="presentation">
+                <a (click)="getWallets()">
+                  <span class=" glyphicon glyphicon-refresh"></span>
+                  Refresh All
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li>
+                <a>
+                  <span class="glyphicon glyphicon-calendar"></span>
+                  {{ethInfo.last_updated * 1000 | date : 'dd-MM-yyyy hh:mm:ss'}}
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span class="glyphicon glyphicon-usd"></span>
+                  {{ethInfo.price_usd}}
+
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span class="glyphicon glyphicon-bitcoin"></span>
+                  {{ethInfo.price_btc}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8 col-centered">
+      <div class="col-sm-4 card-wallet-container" *ngFor="let wallet of wallets" (click)="openWallet(wallet)">
+        <div class="img-card-container col-sm-11" [ngClass]="{'spin' : wallet.refreshing }">
+
+        </div>
+        <div class="card card-wallet">
+          <div class="card-header">
+            <span class="card-title">{{wallet.name}}</span>
+            <span class="card-label">
+              <span class="glyphicon glyphicon-star"></span>
+              ETH
+            </span>
+          </div>
+          <div class="card-footer">
+            <span class="card-balance-eth">
+              <span class="glyphicon glyphicon-signal"></span>
+              {{wallet.balance | number:'1.5' }}
+            </span>
+            <span class="card-balance-fiat">
+              <span class="glyphicon glyphicon-usd"></span>
+              {{wallet.balance * ethInfo.price_usd | number:'1.2' }}
+            </span>
+            <span class=" glyphicon glyphicon-refresh card-icon-refresh" [ngClass]="{'spin' : wallet.refreshing }" (click)="refreshBalance(wallet)"
+              title="Refresh Balance"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

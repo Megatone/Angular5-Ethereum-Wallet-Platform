@@ -1,0 +1,155 @@
+<div class="container-fluid" *ngIf="wallet" [@fadeInOut]>
+
+  <div class="row">
+    <div class="col-lg-6 col-centered message-container">
+      <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
+        <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
+        {{message}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered action-wallet-container-full" (click)="back()">
+      <div class="center center-refresh">
+        <span class="glyphicon glyphicon-share-alt back"></span>
+        <span class="action-wallet">
+          Back
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered" ngxClipboard [cbContent]="wallet.address" (click)="copyToClipboard()">
+      <h1 class="wallet-address">
+        <a>{{wallet.address}}</a>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered">
+      <div class="wallet-qr-code">
+        <ngx-qrcode qrc-element-type="url" [qrc-value]="wallet.address" qrc-version="6" style="height: 195px; width: 195px;"></ngx-qrcode>
+      </div>
+
+      <div class="wallet-name-container" >
+        <span class="wallet-name" (click)="editName()">
+          <span class=" glyphicon glyphicon-pencil icon-edit-wallet-name"></span>
+          {{wallet.name}}
+        </span>
+      </div>
+
+      <div class="wallet-balance-container">
+        <span class="wallet-balance">
+          <span class=" glyphicon glyphicon-signal icon-refresh-wallet-balance"></span>
+          <span class="ether-balance">{{wallet.balance | number:'1.10'}}</span>
+        </span>
+      </div>
+
+      <div class="wallet-balance-container">
+        <span class="wallet-balance">
+          <span class=" glyphicon glyphicon-usd icon-refresh-wallet-balance"></span>
+          <span class="ether-balance">{{(wallet.balance * ethInfo.price_usd) | number:'1.2' }}</span>
+        </span>
+      </div>
+
+      <div class="wallet-balance-container">
+        <span class="wallet-balance">
+          <span class=" glyphicon glyphicon-bitcoin icon-refresh-wallet-balance"></span>
+          <span class="ether-balance"> {{wallet.balance * ethInfo.price_btc | number:'1.8' }}</span>
+        </span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered action-wallet-container-full" (click)="getWallet()">
+      <div class="center center-refresh">
+        <span class="glyphicon glyphicon-refresh" [ngClass]="{'spin' : wallet.refreshing }"></span>
+        <span class="action-wallet">
+          Refresh
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-centered ">
+      <div class="row">
+
+        <div class="col-lg-5 box-dark pull-left action-wallet-container">
+          <div class="center center-send">
+            <span class="glyphicon glyphicon-open"></span>
+            <span class="action-wallet">
+              Send
+            </span>
+          </div>
+        </div>
+
+        <div class="col-lg-5 box-dark pull-right action-wallet-container">
+          <div class="center center-receive">
+            <span class="glyphicon glyphicon-save"></span>
+            <span class="action-wallet">
+              Receive
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="wallet.transactions" [@fadeInOut]>
+    <div class="box-dark col-lg-6 col-centered" style="overflow-x: scroll;">
+      <table class="table table-hover" style="width:100%;overflow:hidden;">
+        <thead class="thhead-default">
+          <tr>
+            <th>
+              TxHash
+            </th>
+            <th>
+            </th>
+            <th>
+              Date
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of wallet.transactions " (click)="openTransaction(transaction)">
+            <td class="td-hash">
+              <a class="a-hash-min">{{transaction.hash.substring(0,20)}}...</a>
+              <a class="a-hash-mid">{{transaction.hash.substring(0,30)}}...</a>
+              <a class="a-hash-max">{{transaction.hash}}</a>
+            </td>
+            <td>
+              <span class="label txt-label" [ngClass]="{'label-success' : transaction.to.toUpperCase() == wallet.address.toUpperCase() ,'label-danger' :  transaction.to.toUpperCase() != wallet.address.toUpperCase() }">
+                {{transaction.to.toUpperCase() == wallet.address.toUpperCase() ? '&nbsp;&nbsp;IN&nbsp;&nbsp;' : 'OUT'}}
+              </span>
+            </td>
+            <td class="td-date">
+              {{calculateTimeText(transaction)}}
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="box-dark col-lg-6 col-centered action-wallet-container-full" (click)="removeWallet()">
+      <div class="center center-trash">
+        <span class="glyphicon glyphicon-trash"></span>
+        <span class="action-wallet">
+          Delete
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+</div>
