@@ -28,9 +28,10 @@ export class User {
   }
 
   public loadLocal(): User {
-    let identity: any = JSON.parse(localStorage.getItem('identity'));
-    if (identity === null)
+    const identity: any = JSON.parse(localStorage.getItem('identity'));
+    if (identity === null) {
       return null;
+    }
     this.load(identity);
     return this;
   }
@@ -41,24 +42,21 @@ export class User {
   }
 
   private load(identity: any = {}) {
-    try {
-      let _this = <User>identity;
-      this._id = _this._id;
-      this.name = _this.name;
-      this.surname = _this.surname;
-      this.email = _this.email;
-      this.password = _this.password;
-      this.role = _this.role;
-      this.phone = _this.phone;
-      this.country = <Country>_this.country;
-      this.address = _this.address;
-      this.registerDate = _this.registerDate;
-      this.updateDate = _this.updateDate;
-      this.lastLogin = _this.lastLogin;
-      this.token = _this.token;
-      this.totp = _this.totp;
-    } catch (err) {
-    }
+    const _this = <User>identity;
+    this._id = _this._id;
+    this.name = _this.name;
+    this.surname = _this.surname;
+    this.email = _this.email;
+    this.password = _this.password;
+    this.role = _this.role;
+    this.phone = _this.phone;
+    this.country = <Country>_this.country;
+    this.address = _this.address;
+    this.registerDate = _this.registerDate;
+    this.updateDate = _this.updateDate;
+    this.lastLogin = _this.lastLogin;
+    this.token = _this.token;
+    this.totp = _this.totp;
   }
 
 }

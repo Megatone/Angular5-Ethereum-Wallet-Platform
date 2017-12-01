@@ -64,7 +64,7 @@
       <div class="col-sm-3">Value:</div>
       <div class="col-sm-9 cbs">
         <span title="The amount of ETH to be transferred to the recipient with the transaction">
-          {{transaction.value / CONST_UNIT | number }} Ether (${{((transaction.value / CONST_UNIT) * ethInfo.price_usd )| number:'.2'
+          {{transaction.value / CONST_UNIT | number }} Ether (${{((transaction.value / CONST_UNIT) * nodeInformation.price_usd )| number:'.2'
           }})
         </span>
       </div>
@@ -90,7 +90,7 @@
       <div class="col-sm-9 cbs">
         <span title="Gas Price * Gas Used By Transaction">
           {{ (transaction.gasUsed * transaction.gasPrice) / CONST_UNIT | number : '.10'}} Ether ($ {{((transaction.gasUsed * transaction.gasPrice)
-          / CONST_UNIT) * ethInfo.price_usd | number : '.2'}})
+          / CONST_UNIT) * nodeInformation.price_usd | number : '.2'}})
         </span>
       </div>
       <div class="col-sm-3">Cumulative Gas Used:</div>

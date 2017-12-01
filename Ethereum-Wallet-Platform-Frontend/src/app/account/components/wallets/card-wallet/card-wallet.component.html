@@ -1,0 +1,32 @@
+<div class="col-sm-4 card-wallet-container" (click)="openWallet()">
+
+  <div class="img-card-container col-sm-11" [ngClass]="{'spin' : wallet.refreshing }">
+  </div>
+
+
+  <div class="card card-wallet">
+
+    <div class="card-header">
+      <span class="card-title">{{wallet.name}}</span>
+      <span class="card-label">
+        <span class="glyphicon glyphicon-star"></span>
+        ETH
+      </span>
+    </div>
+
+    <div class="card-footer">
+      <span class="card-balance-eth">
+        <span class="glyphicon glyphicon-signal"></span>
+        {{wallet.balance | number:'1.5' }}
+      </span>
+      <span class="card-balance-fiat">
+        <span class="glyphicon glyphicon-usd"></span>
+        {{wallet.balance * usd | number:'1.2' }}
+      </span>
+      <span class="glyphicon glyphicon-refresh card-icon-refresh" [ngClass]="{'spin' : wallet.refreshing }" (click)="refreshBalance()"
+        title="Refresh Balance"></span>
+    </div>
+
+  </div>
+
+</div>

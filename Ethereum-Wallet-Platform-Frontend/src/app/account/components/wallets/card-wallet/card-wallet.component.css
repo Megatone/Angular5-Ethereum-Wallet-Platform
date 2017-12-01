@@ -1,0 +1,86 @@
+.card-wallet-container {
+  margin: 1em 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.card-wallet {
+  border: 1px solid #767d94;
+  background-color: #00000033;
+  border-radius: 5px;
+  height: 17.8125rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.card-title {
+  position: relative;
+  top: 1em;
+  left: 1em;
+  font-size: 1.3em;
+}
+.card-label {
+  position: absolute;
+  right: 1.5em;
+  top: 1.2em;
+  padding: 0.5em;
+  background: #ffffff38;
+  border-radius: 5px 0 0 5px;
+  font-size: 0.8em;
+}
+.card-header {
+  height: 25px;
+}
+.card-footer {
+  width: 100%;
+  position: relative;
+  top: 81px;
+  border-radius: 0 0 5px 5px;
+  height: 5em;
+  transition: all 0.3s;
+}
+.card-balance-eth {
+  position: absolute;
+  left: 1em;
+  top: 0.6em;
+}
+.card-balance-fiat {
+  position: absolute;
+  top: 2.7em;
+  left: 1em;
+}
+.card-icon-refresh {
+  position: absolute;
+  right: 0.5em;
+  top: 1em;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+  z-index: 10;
+}
+.img-card-container {
+  position: absolute;
+  height: 100%;
+  background-image: url(/assets/img/ethereum.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 41%;
+  width: 91%;
+  cursor: pointer;
+  transition: all 1s;
+}
+/****************************************/
+
+.card-wallet-container:hover .card-footer {
+  background: #00000096;
+}
+.card-wallet-container:hover .card-wallet {
+  background: white;
+}
+.card-wallet-container:hover .card-title {
+  color: black;
+}
+.card-wallet-container:hover .card-label {
+  background: #00000096;
+}
+.card-wallet-container:hover .img-card-container {
+  background-size: 0%;
+}

@@ -1,83 +1,64 @@
-.card-wallet-container{
-  margin: 1em 0;
-  overflow:hidden;
+.container-wallets {
+  max-width: 1200px;
 }
-
-.card-wallet {
-  border: 1px solid #767d94;
-  background-color: #090f21;
-  /*background-image: url('/assets/img/eth-card.png');*/
-  border-radius: 5px;
-  height: 17.8125rem;
-  background-size: 44%;
+.price-eth-container {
+  padding: 6em 0 3em 0;
+  background: white;
+  background-image: url(/assets/img/ethereum.png);
   background-repeat: no-repeat;
-  background-position: 50%;
-  box-shadow: 4px 4px 12px black;
-  cursor:pointer;
+  background-position-x: 50%;
+  background-position-y: bottom;
 }
-
-.card-wallet:hover {
-  background-color: #1b2138;
-  border: 1px solid white;
+.col-price-info {
+  color: #3e486d;
 }
-
-.card-title {
-  position: relative;
-  top: 1em;
-  left: 1em;
-  font-size: 1.3em;
+.col-price-info .glyphicon {
+  text-align: center;
+  font-size: 3.2em;
+  margin-right: 0.3em;
 }
-.card-label {
-  position: absolute;
-  right: 1.5em;
-  top: 1.2em;
-  padding: 0.5em;
-  background: #ffffff38;
-  border-radius: 5px 0 0 5px;
-  font-size: 0.8em;
+.col-price-info .text-price-info {
+  text-align: center;
+  font-size: 4em;
 }
-.card-header{
-  height: 25px;
+@media screen and (max-width: 991px) {
+  .price-eth-container {
+      background-image: none;
+  }
+  .navbar-header .navbar-nav {
+      float: none !important;
+  }
 }
-
-.card-footer {
-  width: 100%;
-  background: #ffffff38;
-  position: relative;
-  top: 81px;
-  border-radius: 0 0 5px 5px;
-  height: 5em;
+#wallets-nav .navbar-nav-movile {
+  display: none;
 }
-.card-balance-eth {
-  position: absolute;
-  left: 0.5em;
-  top: 0.6em;
+@media screen and (max-width: 730px) {
+  #wallets-nav .navbar-nav {
+      display: none;
+  }
+  #wallets-nav .navbar-nav-movile {
+      display: inline-flex;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+  }
+  #wallets-nav .navbar-nav-movile li {
+      width: 33%;
+      padding: 0.5em;
+      font-size: 1.5em;
+  }
+  .navbar-header {
+      width: 100%;
+      margin: 0;
+      text-align: center;
+      font-size: 2em;
+  }
+  .navbar-header .navbar-nav {
+      float: none !important;
+  }
+  .price-eth-container {
+      padding: 2em 0 1em 0;
+      border-bottom: 1px solid #3e486d;
+  }
 }
-.card-balance-fiat {
-  position: absolute;
-  top: 2.7em;
-  left: 0.5em;
-}
-.card-icon-refresh {
-  position: absolute;
-  right: 0.5em;
-  top: 1em;
-  font-size: 1.5em;
-  cursor: pointer;
-  color:#767d94;
-  z-index:10;
-}
-
-.img-card-container{
-  position: absolute;
-  height: 100%;
-  background-image: url(/assets/img/eth-card.png);
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: 41%;
-  width: 91%;
-  cursor: pointer;
-}
-
-/****************************************/
-

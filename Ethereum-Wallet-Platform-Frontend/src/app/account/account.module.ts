@@ -9,6 +9,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClipboardModule } from 'ngx-clipboard';
 
+
 // components
 import { WalletsComponent } from './components/wallets/wallets.component';
 import { WalletComponent } from './components/wallet/wallet.component';
@@ -19,6 +20,7 @@ import { AccountComponent } from './components/account/account.component';
 import { NewWalletDialogComponent } from './dialogs/new-wallet-dialog/new-wallet-dialog.component';
 import { WalletNameDialogComponent } from './dialogs/wallet-name-dialog/wallet-name-dialog.component';
 import { RemoveWalletDialogComponent } from './dialogs/remove-wallet-dialog/remove-wallet-dialog.component';
+import { CardWalletComponent } from './components/wallets/card-wallet/card-wallet.component';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { RemoveWalletDialogComponent } from './dialogs/remove-wallet-dialog/remo
     AccountComponent,
     NewWalletDialogComponent,
     WalletNameDialogComponent,
-    RemoveWalletDialogComponent
+    RemoveWalletDialogComponent,
+    CardWalletComponent
   ],
   exports: [
 

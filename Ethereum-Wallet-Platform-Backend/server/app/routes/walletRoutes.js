@@ -20,8 +20,6 @@ api.post('/get-balance', md_Auth.ensureAuth, WalletController.getBalance);
 
 api.post('/update-wallet-name', md_Auth.ensureAuth, WalletController.updateWalletName);
 
-api.get('/get-eth-info', WalletController.getEthInfo);
-
 api.post('/get-transactions', md_Auth.ensureAuth, WalletController.getTransactions);
 
 api.post('/get-transaction', md_Auth.ensureAuth, WalletController.getTransaction);

@@ -4,5 +4,10 @@
   "description": "README",
   "scripts": {},
   "author": "Megatone",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://ethereum-wallet-platform.visualstudio.com/_git/Ethereum-Wallet-Platform"
+  }
 }

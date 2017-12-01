@@ -51,14 +51,14 @@
       <div class="wallet-balance-container">
         <span class="wallet-balance">
           <span class=" glyphicon glyphicon-usd icon-refresh-wallet-balance"></span>
-          <span class="ether-balance">{{(wallet.balance * ethInfo.price_usd) | number:'1.2' }}</span>
+          <span class="ether-balance">{{(wallet.balance * nodeInformation.price_usd) | number:'1.2' }}</span>
         </span>
       </div>
 
       <div class="wallet-balance-container">
         <span class="wallet-balance">
           <span class=" glyphicon glyphicon-bitcoin icon-refresh-wallet-balance"></span>
-          <span class="ether-balance"> {{wallet.balance * ethInfo.price_btc | number:'1.8' }}</span>
+          <span class="ether-balance"> {{wallet.balance * nodeInformation.price_btc | number:'1.8' }}</span>
         </span>
       </div>
       <div class="clearfix"></div>

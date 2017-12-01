@@ -14,7 +14,8 @@ var Wallet = require('../models/wallet');
 var Transaction = require('../models/transaction');
 
 var ETH = ethers.Wallet;
-var ETHProvider = new ethers.providers.getDefaultProvider(false);
+//var ETHProvider = new ethers.providers.getDefaultProvider(false);
+var ETHProvider = new ethers.providers.JsonRpcProvider('http://localhost:8001');
 
 //actions
 function getWallets(req, res) {
@@ -259,22 +260,6 @@ function getBalance(req, res) {
     }
 };
 
-function getEthInfo(req, res) {
-    try {
-        request('https://api.coinmarketcap.com/v1/ticker/ethereum/', function (error, response, data) {
-            if (!error && response.statusCode == 200) {
-                var ethInfo = JSON.parse(data)[0];
-                return res.status(200).send({ ethInfo: ethInfo });
-            } else {
-                return res.status(406).send({ message: 'Error get Eth Info' });
-            }
-        });
-    } catch (err) {
-        c.danger('File : WalletController -> Function : getEthInfo() -> ' + err.stack);
-        return res.status(500).send({ message: 'Server Error' });
-    }
-}
-
 function updateWalletName(req, res) {
     try {
         var params = req.body;
@@ -354,7 +339,7 @@ function getTransaction(req, res) {
     try {
         var params = req.body;
         if (!(params && params.walletId && params.transactionId))
-            req.status(406).send({ message: 'Parameters are required' });
+            return res.status(406).send({ message: 'Parameters are required' });
 
         Transaction.findOne({ user: req.user.sub, wallet: params.walletId, _id: params.transactionId }, (err, transactionSearched) => {
             if (err) {
@@ -380,8 +365,7 @@ module.exports = {
     restoreWalletFromEncryptedWallet,
     restoreWalletFromMnemonic,
     removeWallet,
-    getBalance,
-    getEthInfo,
+    getBalance,   
     updateWalletName,
     getTransactions,
     getTransaction

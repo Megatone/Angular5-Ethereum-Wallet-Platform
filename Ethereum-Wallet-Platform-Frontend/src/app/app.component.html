@@ -1,12 +1,12 @@
 <div class="navigation col-lg-12">
-  <nav class="navbar navbar-dark">
+  <nav class="navbar navbar-dark topnav responsive" id="myTopnav">
     <div class="container-fluid">
 
       <div class="navbar-header">
         <a [routerLink]="['/home']" class="navbar-brand">
           Ethereum Wallet Platform
         </a>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" *ngIf="menuVisible">
           <li>
             <a [routerLink]="['/home']" [routerLinkActive]="['active']">
               <span class="glyphicon glyphicon-home"></span>
@@ -14,45 +14,39 @@
             </a>
           </li>
           <li *ngIf="identity">
-              <a [routerLink]="['/account/wallets']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-credit-card"></span>
-                Wallets
-              </a>
-            </li>
-            <li *ngIf="identity">
-              <a [routerLink]="['/account/transactions']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-list"></span>
-                Transactions
-              </a>
-            </li>
-            <li *ngIf="identity">
-              <a [routerLink]="['/account/profile']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-user"></span>
-                Profile
-              </a>
-            </li>
-          <li>
-            <a [routerLink]="['/graphics']" [routerLinkActive]="['active']">
-              <span class="glyphicon glyphicon-stats"></span>
-              Graphics
+            <a [routerLink]="['/account/wallets']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-credit-card"></span>
+              Wallets
+            </a>
+          </li>
+          <li *ngIf="identity">
+            <a [routerLink]="['/account/profile']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+              Profile
             </a>
           </li>
           <li>
-            <a [routerLink]="['/about-us']" [routerLinkActive]="['active']">
-              <span class="glyphicon glyphicon-eye-open"></span>
-              About Us
+            <a [routerLink]="['/home' ,'node']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-tasks"></span>
+              Node Status
             </a>
           </li>
           <li>
-            <a [routerLink]="['/contact']" [routerLinkActive]="['active']">
-              <span class="glyphicon glyphicon-envelope"></span>
-              Contact
+            <a [routerLink]="['/home' , 'services']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-star"></span>
+              Services
             </a>
           </li>
+          <li>
+              <a [routerLink]="['/home' , 'graphics']" [routerLinkActive]="['active']">
+                <span class="glyphicon glyphicon-stats"></span>
+                Graphics
+              </a>
+            </li>
         </ul>
 
 
-        <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+        <ul class="nav navbar-nav navbar-right" *ngIf="!identity && menuVisible">
           <li>
             <a [routerLink]="['/register']" [routerLinkActive]="['active']">
               <span class="glyphicon glyphicon-user"></span>
@@ -66,7 +60,8 @@
             </a>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+
+        <ul class="nav navbar-nav navbar-right" *ngIf="identity && menuVisible">
           <li class="avatar">
             <img src="" *ngIf="identity.image && identity.image != 'null'" />
           </li>
@@ -92,9 +87,28 @@
           </li>
         </ul>
       </div>
+      <i class="icon glyphicon glyphicon-menu-hamburger" (click)="toogleMenu()"></i>
     </div>
   </nav>
+
 </div>
 <div class="col-lg-12 col-centered main-router-outlet">
   <router-outlet></router-outlet>
+  <div class="clearfix"></div>
 </div>
+<footer id="footer">
+  <div class="container">
+    <p>© 2017 Megatone. All Rights Reserved.</p>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a href="#">Privacy</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#">Terms</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#">FAQ</a>
+      </li>
+    </ul>
+  </div>
+</footer>

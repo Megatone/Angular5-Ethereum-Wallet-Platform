@@ -1,8 +1,209 @@
-.title-home{
-  text-align: center;
-  color: #767d94;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Cabin, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  margin: 0 0 35px;
+  letter-spacing: 1px;
+  text-transform: uppercase
 }
-hr{
-  color: #767d94;
-  border-color: #767d94;
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 25px
+}
+@media (min-width: 768px) {
+  p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0 0 35px
+  }
+}
+.masthead {
+  margin: 0;
+  padding: 0;
+  height: -webkit-fill-available;
+  position: relative;
+  left: 0;
+  display: table;
+  width: 100%;
+  padding: 200px 0;
+  text-align: center;
+  color: #fff;
+  background: url(/assets/img/background.jpg) no-repeat bottom center scroll;
+  /*background: url(https://i.ytimg.com/vi/NXkU7EzddoU/maxresdefault.jpg) no-repeat bottom center scroll;
+*/
+
+  background-color: #000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.masthead .intro-body {
+  display: table-cell;
+  vertical-align: middle;
+}
+.masthead .intro-body .brand-heading {
+  font-size: 50px
+}
+.masthead .intro-body .intro-text {
+  font-size: 18px
+}
+@media (min-width: 768px) {
+
+  .masthead .intro-body .brand-heading {
+      font-size: 100px
+  }
+  .masthead .intro-body .intro-text {
+      font-size: 22px
+  }
+}
+.btn-circle {
+  font-size: 26px;
+  width: 55px;
+  height: 55px;
+  margin-top: 15px;
+  line-height: 45px;
+  -webkit-transition: background .3s ease-in-out;
+  -moz-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 100%!important;
+  background: 0 0
+}
+.btn-circle > i {
+  left: 2px;
+  top: 2px;
+}
+.btn-circle:focus,
+.btn-circle:hover {
+  color: #fff;
+  outline: 0;
+  background: rgba(255, 255, 255, .1)
+}
+.content-section {
+  padding-top: 150px;
+  padding-bottom: 150px
+}
+@media (min-width: 992px) {
+  .content-section {
+      padding-top: 200px;
+      padding-bottom: 200px;
+  }
+
+}
+
+#node {
+  background:white;
+  margin-top: -20px;
+  color:black;
+}
+.service-heading {
+  margin: 15px 0;
+  text-transform: none
+}
+
+.fa-stack.fa-4x > i{
+  padding: 0.5em;
+  background: #ffffff;
+  border-radius: 100px;
+  font-size: 5em;
+  color: #3e486d;
+  margin: 0.5em 0;
+}
+
+.section-subheading{
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 75px;
+  text-transform: none;
+  font-family: 'Droid Serif','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.text-muted{
+color:white;
+}
+.text{
+color:#3e486d;
+}
+.progress-bar-dark{
+  background:#3e486d;
+}
+.overlay-header-home{
+  width: 100%;
+  height: 100%;
+  background: #0000003d;
+  position: absolute;
+  top: 0;
+}
+#services{
+  background: url(/assets/img/background.jpg) no-repeat bottom center scroll;
+  background-color: #000;
+  background-size: cover;
+  background-attachment: fixed;
+  color:white;
+}
+.node-title{
+  font-size: 3em;
+}
+.node-number{
+  font-size: 5em;
+  font-weight: 0;
+  color:#3e486d;
+}
+
+.node-text-number{
+  font-size:2em;
+}
+
+.container-graphic{
+  width:100%;
+  padding:0;
+  margin:0;
+}
+
+.col-graphic{
+  margin: 0;
+  padding: 0;
+}
+
+#graphics{
+  background: url(/assets/img/background.jpg) no-repeat bottom center scroll;
+  background-color: #000;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #3e486d;
+}
+
+.price-eth-container{
+  padding: 8em 0;
+  background: white;
+  margin-bottom: 8em;
+  background-image: url(/assets/img/ethereum.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.col-price-info .glyphicon{
+  text-align: center;
+  font-size: 3.2em;
+  margin-right:0.3em;
+}
+
+.col-price-info .text-price-info{
+  text-align: center;
+  font-size: 4em;
+}
+
+@media screen and (max-width: 991px) {
+  .price-eth-container{
+    background-image: none;
+  }
 }

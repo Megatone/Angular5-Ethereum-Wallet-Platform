@@ -12,7 +12,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
         style({ opacity: 0 }),
-        animate("500ms 0.5s", style({ opacity: 1 }))
+        animate('500ms 0.5s', style({ opacity: 1 }))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
         animate(0, style({ opacity: 0 }))
@@ -49,7 +49,7 @@ export class NewWalletDialogComponent {
 
   validate(): boolean {
 
-    if (!(this.data.wallet.name && this.data.wallet.name != '')) {
+    if (!(this.data.wallet.name && this.data.wallet.name !== '')) {
       this.status = 'error';
       this.message = 'Wallet name is required';
       return false;
