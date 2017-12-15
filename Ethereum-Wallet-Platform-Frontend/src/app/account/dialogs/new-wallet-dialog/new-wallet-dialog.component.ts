@@ -34,7 +34,6 @@ export class NewWalletDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-
   create(): void {
     if (this.validate()) {
       this.status = 'success';
@@ -48,7 +47,6 @@ export class NewWalletDialogComponent {
   }
 
   validate(): boolean {
-
     if (!(this.data.wallet.name && this.data.wallet.name !== '')) {
       this.status = 'error';
       this.message = 'Wallet name is required';

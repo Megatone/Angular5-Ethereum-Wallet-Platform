@@ -131,8 +131,10 @@ function updateNodeProcess() {
                 var current = sync.currentBlock - sync.startingBlock;
                 if (max !== 1) {
                     pendingBlocks = max - current;
-                    percentProgress = (current / max) * 100;
+                    percentProgress = (current / max) * 100;                 
                 }
+            }else if(sync ===true){
+                web3.reset(true);
             }
             updateNodeInformation({ pendingBlocks, percentProgress });
             c.info('JOB => Update Node Information => Node Progress => PendingBlocks:' + pendingBlocks + ' Percent:' + percentProgress);

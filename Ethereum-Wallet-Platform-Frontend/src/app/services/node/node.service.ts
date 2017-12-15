@@ -4,13 +4,17 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from '../global';
 import * as io from 'socket.io-client';
+import { NodeInformation } from '../../models/nodeInformation.model';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
 export class NodeService {
+
   public url: string;
   public urlSocket: string;
   public socket;
+
   constructor(
     private _http: Http
   ) {

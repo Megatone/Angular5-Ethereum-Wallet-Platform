@@ -40,7 +40,7 @@ function register(req, res) {
                 }
 
                 user.password = hash;
-                user.name = params.name;
+                user.name = params.name;    
                 user.surname = params.surname;
                 user.email = params.email;
                 user.phone = params.phone;

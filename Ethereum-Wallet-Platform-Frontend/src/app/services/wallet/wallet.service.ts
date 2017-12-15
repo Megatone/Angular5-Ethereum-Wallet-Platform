@@ -7,74 +7,76 @@ import { User } from '../../models/user.model';
 import { Wallet } from '../../models/wallet.model';
 import { Transaction } from '../../models/transaction.model';
 
-
 @Injectable()
 export class WalletService {
 
   public url: string;
+  private identity: User;
 
   constructor(private _http: Http) {
     this.url = GLOBAL.API_URL;
+    this.identity = new User().loadLocal();
   }
 
-  getWallets(modelUser: User): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  getWallets(): Observable<any> {
+    const params = JSON.stringify({ userId: this.identity._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'get-wallets', params, options)
       .map(res => res.json());
   }
 
-  getWallet(modelUser: User, walletId: String): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id, walletId });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  getWallet(modelWallet: Wallet): Observable<any> {
+    const params = JSON.stringify({ userId: this.identity._id, walletId: modelWallet._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'get-wallet', params, options)
       .map(res => res.json());
   }
 
-  getBalance(modelUser: User, modelWallet: Wallet): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id, walletId : modelWallet._id });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  getBalance(modelWallet: Wallet): Observable<any> {
+    const params = JSON.stringify({ userId: this.identity._id, walletId: modelWallet._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'get-balance', params, options)
       .map(res => res.json());
   }
 
-  newWallet(modelUser: User, modelWallet: Wallet) {
-    const params = JSON.stringify({ userId: modelUser._id, walletName: modelWallet.name });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  newWallet(modelWallet: Wallet) {
+    const params = JSON.stringify({ userId: this.identity._id, walletName: modelWallet.name });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'new-wallet', params, options)
       .map(res => res.json());
   }
 
-  updateWalletName(modelUser: User, modelWallet: Wallet) {
-    const params = JSON.stringify({ userId: modelUser._id, walletName: modelWallet.name, walletId: modelWallet._id });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  updateWalletName(modelWallet: Wallet, newName: String) {
+    const params = JSON.stringify({ userId: this.identity._id, walletName: newName, walletId: modelWallet._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'update-wallet-name', params, options)
       .map(res => res.json());
   }
 
-  getTransactions(modelUser: User, modelWallet: Wallet): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id, walletId: modelWallet._id });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  getTransactions(modelWallet: Wallet): Observable<any> {
+    const params = JSON.stringify({ userId: this.identity._id, walletId: modelWallet._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'get-transactions', params, options)
       .map(res => res.json());
   }
 
-  removeWallet(modelUser: User, modelWallet: Wallet): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id, walletId: modelWallet._id, password: modelUser.password });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  removeWallet(modelWallet: Wallet, password: String): Observable<any> {
+    const params = JSON.stringify({ userId: this.identity._id, walletId: modelWallet._id, password });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'remove-wallet', params, options)
       .map(res => res.json());
   }
-  getTransaction(modelUser: User, modelTransaction: Transaction): Observable<any> {
-    const params = JSON.stringify({ userId: modelUser._id, walletId: modelTransaction.wallet._id, transactionId: modelTransaction._id });
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': modelUser.token });
+  getTransaction(modelTransaction: Transaction): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    const params = JSON.stringify({ userId: this.identity._id, walletId: modelTransaction.wallet._id, transactionId: modelTransaction._id });
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.identity.token });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this.url + 'get-transaction', params, options)
       .map(res => res.json());

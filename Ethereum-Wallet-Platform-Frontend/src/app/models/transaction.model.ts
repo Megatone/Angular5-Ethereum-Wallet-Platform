@@ -24,10 +24,8 @@ export class Transaction {
   public confirmations: Number;
   public user: User;
   public wallet: Wallet;
-  private walletService: WalletService;
 
-  constructor(_walletService: WalletService, transaction: any = {}) {
-    this.walletService = _walletService;
+  constructor(transaction: any = {}) {
     this.load(transaction);
   }
 
@@ -53,17 +51,14 @@ export class Transaction {
     this.gasUsed = _this.gasUsed ? _this.gasUsed : 0;
     this.confirmations = _this.confirmations ? _this.confirmations : 0;
     this.user = <User>_this.user ? _this.user : new User();
-    this.wallet = <Wallet>_this.wallet ? _this.wallet : new Wallet(this.walletService);
+    this.wallet = <Wallet>_this.wallet ? _this.wallet : new Wallet();
   }
 
-  public get(user: User, walletId: String, transactionId: String): void {
-    this.wallet._id = walletId;
-    this._id = transactionId;
-    this.walletService.getTransaction(user, this).subscribe(
-      response => {
-        this.load(response.transaction);
-      }
-    );
+  public get(walletService: WalletService): Transaction {
+    walletService.getTransaction(this).subscribe(response => {
+      this.load(response.transaction);
+    });
+    return this;
   }
 
 }

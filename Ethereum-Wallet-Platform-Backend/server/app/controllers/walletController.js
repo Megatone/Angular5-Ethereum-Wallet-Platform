@@ -20,18 +20,17 @@ var ETHProvider = new ethers.providers.JsonRpcProvider('http://localhost:8001');
 //actions
 function getWallets(req, res) {
     try {
-        Wallet.find({ user: req.user.sub, down: false }, { privateKey: 0, password: 0, down: 0 })
-            .exec((err, walletsSearched) => {
-                if (err) {
-                    c.danger('File : WalletController -> Function : getWallets() -> Wallet.find() -> ' + err.stack);
-                    return res.status(406).send({ message: 'Error: can not connect to the database to get wallets.' });
-                }
+        Wallet.find({ user: req.user.sub, down: false }, { privateKey: 0, password: 0, down: 0 }, (err, walletsSearched) => {
+            if (err) {
+                c.danger('File : WalletController -> Function : getWallets() -> Wallet.find() -> ' + err.stack);
+                return res.status(406).send({ message: 'Error: can not connect to the database to get wallets.' });
+            }
 
-                if (walletsSearched.length === 0)
-                    return res.status(200).send({ message: 'Not have Wallets', wallets: [] });
+            if (walletsSearched.length === 0)
+                return res.status(200).send({ message: 'Not have Wallets', wallets: [] });
 
-                return res.status(200).send({ wallets: walletsSearched, message: 'Wallets listed' });
-            });
+            return res.status(200).send({ wallets: walletsSearched, message: 'Wallets listed' });
+        }).populate({ path: 'user', select: { password: 0  , totp : 0} });
     } catch (err) {
         c.danger('File : UserController -> Function : getWallets() -> ' + err.stack);
         return res.status(500).send({ message: 'Server Error' });
@@ -365,7 +364,7 @@ module.exports = {
     restoreWalletFromEncryptedWallet,
     restoreWalletFromMnemonic,
     removeWallet,
-    getBalance,   
+    getBalance,
     updateWalletName,
     getTransactions,
     getTransaction

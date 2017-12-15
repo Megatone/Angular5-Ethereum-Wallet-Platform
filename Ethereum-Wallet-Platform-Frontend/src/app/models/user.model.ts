@@ -1,4 +1,7 @@
 import { Country } from './country.model';
+import { Wallet } from './wallet.model';
+import { WalletService } from '../services/wallet/wallet.service';
+
 
 export class User {
 
@@ -18,6 +21,8 @@ export class User {
   public totp: {
     active: Boolean
   };
+  public wallets: Array<Wallet>;
+
   constructor(identity: any = {}, token: String = null) {
     this.load(identity);
     this.token = token;
@@ -43,20 +48,33 @@ export class User {
 
   private load(identity: any = {}) {
     const _this = <User>identity;
-    this._id = _this._id;
-    this.name = _this.name;
-    this.surname = _this.surname;
-    this.email = _this.email;
-    this.password = _this.password;
-    this.role = _this.role;
-    this.phone = _this.phone;
-    this.country = <Country>_this.country;
-    this.address = _this.address;
-    this.registerDate = _this.registerDate;
-    this.updateDate = _this.updateDate;
-    this.lastLogin = _this.lastLogin;
-    this.token = _this.token;
-    this.totp = _this.totp;
+    this._id = _this._id ? _this._id : '';
+    this.name = _this.name ? _this.name : '';
+    this.surname = _this.surname ? _this.surname : '';
+    this.email = _this.email ? _this.email : '';
+    this.password = _this.password ? _this.password : '';
+    this.role = _this.role ? _this.role : '';
+    this.phone = _this.phone ? _this.phone : '';
+    this.country = <Country>_this.country ? _this.country : new Country('', '');
+    this.address = _this.address ? _this.address : '';
+    this.registerDate = _this.registerDate ? _this.registerDate : '';
+    this.updateDate = _this.updateDate ? _this.updateDate : '';
+    this.lastLogin = _this.lastLogin ? _this.lastLogin : '';
+    this.token = _this.token ? _this.token : '';
+    this.totp = _this.totp ? _this.totp : { active: false };
+    this.wallets = _this.wallets ? _this.wallets : new Array<Wallet>();
+  }
+
+  public getWallets(walletService: WalletService): void {
+    walletService.getWallets().subscribe(wallets => {
+      this.wallets = <Array<Wallet>>wallets.wallets;
+    });
+  }
+
+  public createNewWallet(walletService: WalletService, wallet: Wallet): void {
+    walletService.newWallet(wallet).subscribe(newWallet => {
+      this.getWallets(walletService);
+    });
   }
 
 }

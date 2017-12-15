@@ -6,7 +6,6 @@ var io = require('socket.io')(serverIO);
 var settings = require('../../config/settings');
 var c = require('../utils/console/console');
 
-
 function initSocketService() {
     serverIO.listen(settings.sockets.port, function () {
         c.success("Socket IO Service Init Succesffully");

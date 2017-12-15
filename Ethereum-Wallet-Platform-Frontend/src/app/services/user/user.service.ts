@@ -10,9 +10,11 @@ import { User } from '../../models/user.model';
 export class UserService {
 
   public url: string;
+  private identity: User;
 
   constructor(private _http: Http) {
     this.url = GLOBAL.API_URL;
+    this.identity = new User().loadLocal();
   }
 
   register(modelUser: User): Observable<any> {

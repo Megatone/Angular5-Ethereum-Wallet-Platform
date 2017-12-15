@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Wallet } from '../../../models/wallet.model';
 import { WalletService } from '../../../services/wallet/wallet.service';
@@ -10,8 +9,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { RemoveWalletDialogComponent } from '../../dialogs/remove-wallet-dialog/remove-wallet-dialog.component';
 import { Transaction } from '../../../models/transaction.model';
 import { NodeInformation } from '../../../models/nodeInformation.model';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-
+import { Alert } from '../../../models/alert.model';
 
 
 @Component({
@@ -36,11 +34,9 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 export class WalletComponent implements OnInit {
 
-  public status: string;
-  public message: string;
+  public alert: Alert;
   public identity: User;
   public wallet: Wallet;
-  public WalletId: String;
   public nodeInformation: NodeInformation;
 
   constructor(
@@ -49,73 +45,47 @@ export class WalletComponent implements OnInit {
     private _walletService: WalletService,
     public dialog: MatDialog
   ) {
+    this.alert = new Alert();
     this.identity = new User().loadLocal();
     this.nodeInformation = new NodeInformation();
-    this.wallet = new Wallet(this._walletService);
     this._route.params.subscribe(params => {
-      this.WalletId = params['walletId'];
+      this.wallet = new Wallet({ _id: params['walletId'], user: this.identity });
     });
   }
 
   ngOnInit(): void {
     this.nodeInformation.suscribeChanges();
+    this.alert.suscribeChanges(this._router);
     this.getWallet();
   }
 
   getWallet(): void {
-    this.wallet.get(this.identity, this.WalletId);
+    this.wallet.get(this._walletService);
   }
 
   editName(): void {
-    this.status = null;
-    this.message = null;
     const dialogRef = this.dialog.open(WalletNameDialogComponent, {
       width: '100%',
       panelClass: ['container', 'dialog-container'],
-      data: { name: this.wallet.name }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+      data: { wallet: Object.assign({}, this.wallet) }
+    }).afterClosed().subscribe(result => {
       if (result) {
-        this.wallet.name = result;
-        this._walletService.updateWalletName(this.identity, this.wallet).subscribe(
-          response => {
-            this.status = 'success';
-            this.message = response.message;
-            this.getWallet();
-          }, error => {
-            this.status = 'error';
-            this.message = error.json().message;
-          }
-        );
+        this.wallet.updateName(this._walletService, result.wallet.name);
       }
     });
   }
 
   removeWallet(): void {
-    this.message = null;
-    this.status = null;
     const dialogRef = this.dialog.open(RemoveWalletDialogComponent, {
       width: '100%',
       panelClass: ['container', 'dialog-container'],
       data: {
-        wallet: this.wallet,
-        user: this.identity
+        wallet: Object.assign({}, this.wallet),
+        user: Object.assign({}, this.identity)
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+    }).afterClosed().subscribe(result => {
       if (result) {
-        this._walletService.removeWallet(this.identity, this.wallet).subscribe(
-          response => {
-            this.status = 'success';
-            this.message = response.message;
-            setTimeout(() => { this._router.navigate(['/account/wallets']); }, 1500);
-          }, error => {
-            this.status = 'error';
-            this.message = error.json().message;
-          }
-        );
+        this.wallet.remove(this._walletService, result.user.password);
       }
     });
   }
@@ -129,26 +99,24 @@ export class WalletComponent implements OnInit {
   }
 
   copyToClipboard(): void {
-    this.message = null;
-    this.status = null;
-    this.message = 'Address copied to Clipboard Successfully';
-    this.status = 'success';
+    this.alert.success('Address copied to Clipboard Successfully');
   }
 
   calculateTimeText(transaction: Transaction): String {
-    const now = new Date();
-    let delta = Math.abs(<any>(now) - <any>(new Date(<any>(transaction.timeStamp) * 1000))) / 1000;
+    try {
+      const now = new Date();
+      let delta = Math.abs(<any>(now) - <any>(new Date(<any>(transaction.timeStamp) * 1000))) / 1000;
+      const days = Math.floor(delta / 86400);
+      delta -= days * 86400;
+      const hours = Math.floor(delta / 3600) % 24;
+      delta -= hours * 3600;
+      const seconds = delta % 60;
+      return <any>days + ' days ' + <any>hours + ' hours ago';
+    } catch (err) {
+    }
+  }
 
-    // calculate (and subtract) whole days
-    const days = Math.floor(delta / 86400);
-    delta -= days * 86400;
+  send(): void {
 
-    // calculate (and subtract) whole hours
-    const hours = Math.floor(delta / 3600) % 24;
-    delta -= hours * 3600;
-
-    // what's left is seconds
-    const seconds = delta % 60;
-    return <any>days + ' days ' + <any>hours + ' hours ago';
   }
 }

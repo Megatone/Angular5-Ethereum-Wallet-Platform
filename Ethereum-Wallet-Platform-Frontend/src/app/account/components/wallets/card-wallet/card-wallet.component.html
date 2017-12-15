@@ -23,7 +23,7 @@
         <span class="glyphicon glyphicon-usd"></span>
         {{wallet.balance * usd | number:'1.2' }}
       </span>
-      <span class="glyphicon glyphicon-refresh card-icon-refresh" [ngClass]="{'spin' : wallet.refreshing }" (click)="refreshBalance()"
+      <span class="glyphicon glyphicon-refresh card-icon-refresh" [ngClass]="{'spin' : wallet.refreshing }" (click)="getWallet()"
         title="Refresh Balance"></span>
     </div>
 

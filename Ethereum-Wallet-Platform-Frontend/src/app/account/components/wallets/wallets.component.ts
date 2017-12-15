@@ -8,6 +8,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { MatDialog } from '@angular/material';
 import { NewWalletDialogComponent } from '../../dialogs/new-wallet-dialog/new-wallet-dialog.component';
 import { NodeInformation } from '../../../models/nodeInformation.model';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 
 @Component({
@@ -16,6 +17,17 @@ import { NodeInformation } from '../../../models/nodeInformation.model';
   styleUrls: ['./wallets.component.css'],
   providers: [
     WalletService
+  ],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({ opacity: 0 }),
+        animate('500ms 0.5s', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate('500ms 0.5s', style({ opacity: 0 }))
+      ])
+    ])
   ]
 })
 
@@ -40,14 +52,8 @@ export class WalletsComponent implements OnInit {
   ngOnInit(): void {
     this.nodeInformation.suscribeChanges();
   }
-
   getWallets(): void {
-    this.refreshing = true;
-    this._walletService.getWallets(this.identity).subscribe(
-      response => {
-        this.wallets = (response.wallets) ? response.wallets : [];
-      }
-    );
+    this.identity.getWallets(this._walletService);
   }
 
   openDialogNewWallet(): void {
@@ -55,19 +61,9 @@ export class WalletsComponent implements OnInit {
       width: '100%',
       panelClass: ['container', 'dialog-container'],
       data: { wallet: { name: 'account' } }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+    }).afterClosed().subscribe(result => {
       if (result) {
-        this._walletService.newWallet(this.identity, result).subscribe(
-          response => {
-            if (response && response.wallet) {
-              this.getWallets();
-            }
-          },
-          error => {
-          }
-        );
+        this.identity.createNewWallet(this._walletService, <Wallet>result);
       }
     });
   }

@@ -189,12 +189,13 @@ body {
   margin: 0 auto;
 }
 .box-dark {
-  background: #090f21;
+  background: #090f2103;
   border: 1px solid #767d94;
   border-radius: 5px;
   margin-top: 1em;
   box-shadow: 4px 4px 12px black;
   padding: 1em;
+  color:white;
 }
 div.qrcode > img {
   width: 195 !important;

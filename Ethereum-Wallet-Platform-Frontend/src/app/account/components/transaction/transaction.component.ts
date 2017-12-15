@@ -10,6 +10,7 @@ import { scheduleMicroTask } from '@angular/core/src/util';
 
 import { NodeInformation } from '../../../models/nodeInformation.model';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Alert } from '../../../models/alert.model';
 
 @Component({
   selector: 'app-transaction',
@@ -32,8 +33,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class TransactionComponent implements OnInit {
 
-  public status: String;
-  public message: String;
+  public alert: Alert;
   public identity: User;
   public transaction: Transaction;
   public CONST_UNIT: Number = 1000000000000000000;
@@ -44,11 +44,12 @@ export class TransactionComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
+    this.alert = new Alert();
     this.identity = new User().loadLocal();
     this.nodeInformation = new NodeInformation();
     this._route.params.subscribe(params => {
-      this.transaction = new Transaction(this._walletService);
-      this.transaction.get(this.identity, params['walletId'], params['transactionId']);
+      const wallet = new Wallet({ _id: params['walletId'] });
+      this.transaction = new Transaction({ _id: params['transactionId'], wallet: wallet }).get(this._walletService);
     });
   }
 
@@ -57,10 +58,7 @@ export class TransactionComponent implements OnInit {
   }
 
   copyToClipboard(): void {
-    this.message = null;
-    this.status = null;
-    this.message = 'Transaction hash copied to Clipboard Successfully';
-    this.status = 'success';
+    this.alert.success('Transaction hash copied to Clipboard Successfully');
   }
 
   back(): void {

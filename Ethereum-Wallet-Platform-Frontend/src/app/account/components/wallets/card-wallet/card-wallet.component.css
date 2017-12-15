@@ -49,12 +49,12 @@
 }
 .card-icon-refresh {
   position: absolute;
-  right: 0.5em;
-  top: 1em;
+  right: 0;
   font-size: 1.5em;
   cursor: pointer;
   color: white;
   z-index: 10;
+  padding: 1em;
 }
 .img-card-container {
   position: absolute;

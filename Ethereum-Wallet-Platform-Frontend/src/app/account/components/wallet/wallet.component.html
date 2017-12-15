@@ -2,9 +2,9 @@
 
   <div class="row">
     <div class="col-lg-6 col-centered message-container">
-      <div class="alert alert-{{status}} " *ngIf="message" [@fadeInOut]>
-        <span class="glyphicon glyphicon-{{ status =='success' ? 'ok' : 'remove'}}"></span>
-        {{message}}
+      <div class="alert alert-{{alert.type}} " *ngIf="alert.status" [@fadeInOut] (click)="alert.hide()">
+        <span class="glyphicon glyphicon-{{ alert.type =='success' ? 'ok' : 'remove'}}"></span>
+        {{alert.message}}
       </div>
     </div>
   </div>

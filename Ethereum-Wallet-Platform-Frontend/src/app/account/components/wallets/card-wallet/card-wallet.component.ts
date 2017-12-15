@@ -24,12 +24,11 @@ export class CardWalletComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wallet = new Wallet(this._walletService, this.wallet);
-    this.refreshBalance();
+    this.getWallet();
   }
 
-  refreshBalance(): void {
-    this.wallet.refreshBalance(this.identity);
+  getWallet(): void {
+    this.wallet = new Wallet(this.wallet).get(this._walletService);
   }
 
   openWallet(): void {

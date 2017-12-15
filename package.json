@@ -8,6 +8,10 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://ethereum-wallet-platform.visualstudio.com/_git/Ethereum-Wallet-Platform"
-  }
+    "url": "git+https://github.com/Megatone/Angular5-Ethereum-Wallet-Platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Megatone/Angular5-Ethereum-Wallet-Platform/issues"
+  },
+  "homepage": "https://github.com/Megatone/Angular5-Ethereum-Wallet-Platform#readme"
 }

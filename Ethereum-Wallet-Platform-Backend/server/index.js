@@ -8,7 +8,7 @@ var spawn = require('child-process-promise').spawn;
 var settings = require('./config/settings');
 var cronJobs = require('./app/jobs/cron');
 var socketsService = require('./app/sockets/service');
-
+var www = require('./www');
 psList().then(data => {
     //Init Geth to Update BlockChain and Up JSONRPC Service on port 8001
     if (data.filter(p => p.name == 'geth.exe').length === 0) {
@@ -34,6 +34,7 @@ psList().then(data => {
                         c.info('Express Listen Port "' + settings.express.port + '"');
                         socketsService.initSocketService();
                         cronJobs.initJob();
+                        www.initService();
                     });
                 }).catch(err => {
                     c.danger(err)

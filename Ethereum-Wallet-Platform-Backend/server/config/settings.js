@@ -21,8 +21,11 @@ module.exports = {
         datadir: 'Y:/GETH/data/full',
         nousb: true
     },
-    sockets:{
-        port : 8002
+    sockets: {
+        port: 8002
+    },
+    www: {
+        port: 80
     },
     getMongoCommand: (mongo) => {
         return mongo.command + ' "' + mongo.path + '"';

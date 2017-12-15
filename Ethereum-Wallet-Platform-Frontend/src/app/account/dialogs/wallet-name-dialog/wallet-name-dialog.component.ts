@@ -11,7 +11,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
         style({ opacity: 0 }),
-        animate("500ms 0.5s", style({ opacity: 1 }))
+        animate('500ms 0.5s', style({ opacity: 1 }))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
         animate(0, style({ opacity: 0 }))
@@ -34,12 +34,11 @@ export class WalletNameDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-
   accept(): void {
     if (this.validate()) {
       this.status = 'success';
       this.message = 'Valid Wallet Name';
-      setTimeout(() => { this.dialogRef.close(this.data.name); }, 1500);
+      setTimeout(() => { this.dialogRef.close(this.data); }, 1500);
     }
   }
 
@@ -48,13 +47,13 @@ export class WalletNameDialogComponent {
   }
 
   validate(): boolean {
-    if (!(this.data.name && this.data.name != '')) {
+    if (!(this.data.wallet.name && this.data.wallet.name !== '')) {
       this.status = 'error';
       this.message = 'Wallet name is required';
       return false;
     }
 
-    if (!(this.data.name.length > 3)) {
+    if (!(this.data.wallet.name.length > 3)) {
       this.status = 'error';
       this.message = 'Wallet name must minimun 4 characters';
       return false;

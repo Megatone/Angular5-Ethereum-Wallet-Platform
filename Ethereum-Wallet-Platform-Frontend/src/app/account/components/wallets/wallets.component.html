@@ -82,8 +82,8 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-12 col-centered">
-      <app-card-wallet *ngFor="let wallet of wallets" [wallet]="wallet" [identity]="identity" [usd]="nodeInformation.price_usd"></app-card-wallet>
+    <div class="col-lg-12 col-centered" *ngIf="identity.wallets.length > 0" [@fadeInOut]>
+      <app-card-wallet *ngFor="let wallet of identity.wallets" [wallet]="wallet" [identity]="identity" [usd]="nodeInformation.price_usd"></app-card-wallet>
     </div>
 
   </div>

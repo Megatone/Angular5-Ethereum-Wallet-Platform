@@ -4,7 +4,7 @@
       {{message}}
     </div>
     <div class="form-group" [@fadeOut] *ngIf="status!='success'">
-      <input matInput [(ngModel)]="data.name" #name="ngModel" placeholder="Wallet Name" class="form-control-dark" tabindex="1"
+      <input matInput [(ngModel)]="data.wallet.name" #name="ngModel" placeholder="Wallet Name" class="form-control-dark" tabindex="1"
         required  pattern=".{4,50}"/>
       <div class="form-control-error pull-right" *ngIf="!name.valid && name.touched">
         <span class="glyphicon glyphicon-remove"></span>

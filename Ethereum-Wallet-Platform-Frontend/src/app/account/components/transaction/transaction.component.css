@@ -49,13 +49,14 @@
 .wallet-address {
     text-align: center;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1em;
     cursor: pointer;
     margin: 1em 0;
+    color:white;
 }
 .wallet-address > a {
     margin: 0;
-    color: #767d94;
+    color: white;
     user-select: none;
     cursor: pointer;
     text-decoration: none;
@@ -115,7 +116,7 @@
     color: white;
 }
 .center-refresh {
-    color: #767d94;
+    color: white;
     font-size: 1.5em;
 }
 .message-container {
@@ -141,14 +142,19 @@
 }
 .td-hash a {
     margin: 0;
-    color: #767d94;
+    color: white;
     user-select: none;
     cursor: pointer;
     text-decoration: none;
 }
+tr:hover .td-hash a,
+tr:hover  .td-date{
+  color:black;
+}
+
 .td-date {
     margin: 0;
-    color: #767d94;
+    color: white;
     user-select: none;
     cursor: pointer;
     text-decoration: none;
@@ -161,7 +167,7 @@
 }
 
 .transaction-box{
-  color: #767d94;
+  color: white;
   font-size:1.2em;
   line-height: 2em;
 }
